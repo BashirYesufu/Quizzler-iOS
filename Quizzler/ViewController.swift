@@ -58,11 +58,12 @@ class ViewController: UIViewController {
     
     func updateUI() {
         questionLabel.text = quiz[questionNumber].text
-        Timer.scheduledTimer(timeInterval: 1.0,
+        Timer.scheduledTimer(timeInterval: 0.2,
                              target: self,
                              selector: #selector(clearColors),
                              userInfo: nil,
                              repeats: false)
+        progressBar.progress = questionNumber / quiz.count
     }
     
     @objc func clearColors() {
