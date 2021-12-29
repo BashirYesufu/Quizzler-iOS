@@ -63,7 +63,7 @@ class ViewController: UIViewController {
                              selector: #selector(clearColors),
                              userInfo: nil,
                              repeats: false)
-        progressBar.progress = questionNumber / quiz.count
+        progressBar.progress = Float(questionNumber + 1) / Float(quiz.count)
     }
     
     @objc func clearColors() {
