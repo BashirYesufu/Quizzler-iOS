@@ -25,31 +25,27 @@ class ViewController: UIViewController {
     @IBAction func answerButtonPressed(_ sender: UIButton) {
         
         let userAnswer = sender.currentTitle!
-        let answer = quizBrain.checkAnswer(userAnswer: userAnswer)
+        let rightAnswer = quizBrain.checkAnswer(userAnswer: userAnswer)
         
-        if answer {
+        if rightAnswer {
             sender.backgroundColor = .green
         } else {
             sender.backgroundColor = .red
         }
         
-        if questionNumber < quiz.count - 1 {
-            questionNumber += 1
-        } else {
-            questionNumber = 0
-        }
+        quizBrain.nextQuestion()
         
         updateUI()
     }
     
     func updateUI() {
-        questionLabel.text = quiz[questionNumber].text
+        questionLabel.text = quizBrain.getQuestionText()
         Timer.scheduledTimer(timeInterval: 0.2,
                              target: self,
                              selector: #selector(clearColors),
                              userInfo: nil,
                              repeats: false)
-        progressBar.progress = Float(questionNumber + 1) / Float(quiz.count)
+        progressBar.progress = quizBrain.getProgress()
     }
     
     @objc func clearColors() {
